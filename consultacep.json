@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "28da61af-b50b-4ef7-b8fc-b82812d9e8f2",
+		"name": "Via Cep",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Consulta Cep",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function zipCode() {\r",
+							"\r",
+							"    var zipCode = [\"02007-045\",\"13458-580\",\"03015-017\",\"05892-387\",\"08452-252\",\"04877-265\",\"08320-685\",\"04182-125\",\"02987-265\",\"08240-174\",\"04405-185\",\"88058-115\",\"88020-230\",\"88090-561\",\"88066-405\",\"88058-256\",\"88040-445\"];\r",
+							"\r",
+							"    console.log(zipCode)\r",
+							"\r",
+							"    var randomItem = zipCode[Math.floor(Math.random() * zipCode.length)];\r",
+							"\r",
+							"    return randomItem;\r",
+							"\r",
+							"    \r",
+							"}\r",
+							"\r",
+							"pm.variables.set(\"ZipCode\", zipCode());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/ws/{{ZipCode}}/json",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"ws",
+						"{{ZipCode}}",
+						"json"
+					]
+				},
+				"description": "Cep"
+			},
+			"response": []
+		}
+	]
+}
